@@ -2,21 +2,33 @@
 
 **1. Prerequisite**
 
-```bash
-Database name : flywaydb
-Username : flywaydb
-Password : flywaydb
+* Docker
+* Java 8+
 
-```
-
-**2. Run maven for the first time**
+**2. Run docker compose**
 
 Command:
 
 ```bash
-mvn flyway:info -Dflyway.outOfOrder=true
-
+./run-db
 ```
+
+**3. Run maven for the first time**
+
+Command:
+
+```bash
+./mvnw clean compile
+```
+
+**4. Run maven for the first time**
+
+Command:
+
+```bash
+./mvnw flyway:info -Dflyway.outOfOrder=true
+```
+
 Result:
 
 ```bash
@@ -50,14 +62,14 @@ Result:
 [INFO] ------------------------------------------------------------------------
 ```
 
-**3. Run maven to execute database migration**
+**5. Run maven to execute database migration**
 
 Command:
 
 ```bash
-mvn flyway:migrate -Dflyway.outOfOrder=true
-
+./mvnw flyway:migrate -Dflyway.outOfOrder=true
 ```
+
 Result:
 
 ```bash
@@ -109,19 +121,19 @@ Result:
 [ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
 ```
 
-**4. Your process will return an error because there are 1 file conflict**
+**6. Your process will return an error because there are 1 file conflict**
 
 ```bash
 Existing valid script: "db/migration/sql/ddl/V1__Create_person_table.sql"
 Invalid/duplicate script: "db/migration/sql/ddl/V4__Create_person_table.sql"
 ```
 
-**5. Check unsuccessful process**
+**7. Check unsuccessful process**
 
 Command:
 
 ```bash
-mvn flyway:info -Dflyway.outOfOrder=true
+./mvnw flyway:info -Dflyway.outOfOrder=true
 ```
 
 Result:
@@ -157,12 +169,12 @@ Result:
 [INFO] ------------------------------------------------------------------------
 ```
 
-**6. To continue your next migrating process, do 2 steps bellow**
+**8. To continue your next migrating process, do 2 steps bellow**
 
 (1.) Repair command:
 
 ```bash
-mvn flywaydb:repair
+./mvnw flyway:repair
 ```
 
 Result:
@@ -193,12 +205,13 @@ Result:
 db/migration/sql/ddl/V4__Create_person_table.sql
 ```
 
-**7. Check your latest migration status**
+**9. Check your latest migration status**
 
 Command:
 
 ```bash
-mvn flyway:info -Dflyway.outOfOrder=true
+./mvnw clean compile
+./mvnw flyway:info -Dflyway.outOfOrder=true
 ```
 
 Result:
@@ -232,12 +245,13 @@ Result:
 [INFO] Final Memory: 12M/150M
 [INFO] ------------------------------------------------------------------------
 ```
-**8. Run migration**
+
+**10. Run migration**
 
 Command:
 
 ```bash
-mvn flyway:migrate -Dflyway.outOfOrder=true
+./mvnw flyway:migrate -Dflyway.outOfOrder=true
 ```
 
 Result:
@@ -266,12 +280,12 @@ Result:
 [INFO] ------------------------------------------------------------------------
 ```
 
-**9. Check status**
+**11. Check status**
 
 Command:
 
 ```bash
-mvn flyway:info -Dflyway.outOfOrder=true
+./mvnw flyway:info -Dflyway.outOfOrder=true
 ```
 
 Result:
@@ -306,23 +320,24 @@ Result:
 [INFO] ------------------------------------------------------------------------
 ```
 
-**10. Rename migration file**
+**12. Rename migration file**
 
 ```bash
 1. "db/migration/sql/dml/_V4__SyncMeta.sql" to "db/migration/sql/dml/V4__SyncMeta.sql"
 2. "db/migration/sql/dml/V99__Add_people.java" to "db/migration/sql/dml/V5__Add_people.java"
 ```
 
-**11. Update file V5__Add_people.java**
+**13. Update file V5__Add_people.java**
 
 Change "VERSION" variable value from "'99'" to "'5'"
 
-**12. Check status**
+**14. Check status**
 
 Command:
 
 ```bash
-mvn flyway:info -Dflyway.outOfOrder=true
+./mvnw clean compile
+./mvnw flyway:info -Dflyway.outOfOrder=true
 ```
 
 Result:
@@ -359,12 +374,12 @@ Result:
 [INFO] ------------------------------------------------------------------------
 ```
 
-**13. Run migration**
+**15. Run migration**
 
 Command:
 
 ```bash
-mvn flyway:migrate -Dflyway.outOfOrder=true
+./mvnw flyway:migrate -Dflyway.outOfOrder=true
 ```
 
 Result:
@@ -397,12 +412,12 @@ Result:
 [INFO] ------------------------------------------------------------------------
 ```
 
-**14. Check status**
+**16. Check status**
 
 Command:
 
 ```bash
-mvn flyway:info -Dflyway.outOfOrder=true
+./mvnw flyway:info -Dflyway.outOfOrder=true
 ```
 
 Result:

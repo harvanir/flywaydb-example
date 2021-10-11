@@ -1,0 +1,18 @@
+version: '3.1'
+
+services:
+
+  flywaydb-mysql:
+    image: mysql:8.0.26
+    container_name: flywaydb-mysql
+    ports:
+      - 13306:3306
+    environment:
+      - MYSQL_DATABASE=flywaydb-example
+      - MYSQL_USER=flywaydb-example
+      - MYSQL_PASSWORD=password
+      - MYSQL_ROOT_PASSWORD=password
+      - TZ=UTC
+    volumes:
+      - ./dir/datadir:/var/lib/mysql:rw
+      - ./dir/conf.d:/etc/mysql/conf.d:ro
